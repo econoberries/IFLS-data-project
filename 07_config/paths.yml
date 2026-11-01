@@ -1,0 +1,8 @@
+# Paths are relative to repository root; raw and generated data remain local.
+raw_dta: 01_data/01_raw_dta
+raw_csv: 01_data/02_raw_csv
+metadata: 01_data/03_metadata
+cleaned: 01_data/04_cleaned
+harmonized: 01_data/05_harmonized
+panel: 01_data/06_panel
+research_ready: 01_data/07_research_ready

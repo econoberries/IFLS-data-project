@@ -1,0 +1,8 @@
+# Include special surveys separately; do not assume identical questionnaire structure.
+waves:
+  ifls1: {year: 1993}
+  ifls2: {year: 1997}
+  ifls2plus: {year: 1998, special: true}
+  ifls3: {year: 2000}
+  ifls4: {year: 2007}
+  ifls5: {year: 2014}

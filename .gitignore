@@ -1,27 +1,37 @@
-# R and RStudio
+# R / RStudio
 .Rhistory
 .RData
 .Ruserdata
 .Rproj.user/
 .Renviron
-
-# IFLS microdata and generated data
-01_data/01_raw_dta/
-01_data/02_raw_csv/
-01_data/04_cleaned/
-01_data/05_panel/
-01_data/03_metadata/*.csv
-01_data/03_metadata/*.rds
+renv/library/
+renv/staging/
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+# Local IFLS data: all content ignored, including metadata extracts
+01_data/**
+!01_data/README.md
+# Generated outputs
+05_outputs/**
+!05_outputs/README.md
+04_outputs/**
+!04_outputs/README.md
+# Data file safety anywhere
 *.dta
 *.DTA
 *.sav
+*.csv
 *.parquet
+*.feather
 *.rds
 *.RData
-
-# Generated outputs and temporary files
-04_outputs/tables/
-04_outputs/figures/
+*.xlsx
+# Notebook and local artifacts
 *.html
 *.log
 .DS_Store

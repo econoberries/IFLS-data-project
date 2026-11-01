@@ -1,0 +1,18 @@
+[project]
+name = "ifls-data-preparation"
+version = "0.1.0"
+description = "IFLS data validation and cross-language interoperability"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.2,<4",
+  "pyarrow>=17,<25",
+  "pyreadstat>=1.2,<2",
+  "pyyaml>=6,<7"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "jupyterlab>=4,<5"]
+
+[tool.pytest.ini_options]
+testpaths = ["06_tests/python"]
+pythonpath = ["."]

@@ -57,3 +57,26 @@ The setup scripts only create missing local folders. Do not upload IFLS responde
 5. Export research-defined samples for causal ML.
 
 **Data safety:** Original `.dta` files are immutable. Never commit raw or generated respondent-level data. Use synthetic fixtures for tests.
+
+## First real-data pilot: IFLS 5 Book K
+
+Place your legally obtained `bk_ar1.dta` at `01_data/01_raw_dta/ifls5/hh/bk_ar1.dta`. From the repository root, run:
+
+```r
+source("02_scripts/R/00_setup_folders.R")
+source("02_scripts/R/01_install_packages.R")
+source("02_scripts/R/02_convert_dta.R")
+source("02_scripts/R/06_validate_conversion.R")
+validate_ifls_conversion("ifls5", "bk_ar1", book = "hh")
+```
+
+Then activate the Python environment and independently validate:
+
+```bash
+python 02_scripts/python/01_validate_conversion.py --wave ifls5 --book hh --dataset bk_ar1
+python -m pytest
+```
+
+Change only `wave` and `dataset` at the top of `02_scripts/R/02_convert_dta.R` for subsequent conversions. `dataset = "all"` processes a wave; `wave = "all"` and `dataset = "all"` process all files. The folder directly beneath `01_raw_dta/` must be the wave name. Existing outputs are skipped unless `overwrite = TRUE`.
+
+**Validation limits:** These initial validators check structural integrity only; they do not yet prove equality of all values, types, value labels, or tagged missing values. Real IFLS data must be supplied and tested locally. No real-data validation has been executed by the repository setup.

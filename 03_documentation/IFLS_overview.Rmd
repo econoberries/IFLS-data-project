@@ -1,0 +1,24 @@
+---
+title: "IFLS Data Preparation — Overview"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+# Scope
+
+Document IFLS 1–5 data structure, books, questionnaire modules, and longitudinal identifiers.
+
+# Preparation
+
+Run the setup and package scripts from the project root.
+
+```{r eval=FALSE}
+source("02_scripts/00_setup_folders.R")
+source("02_scripts/01_install_packages.R")
+```
+
+# Data inventory
+
+To be populated after the file audit.

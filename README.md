@@ -1,41 +1,59 @@
 # IFLS Data Preparation Project
 
-A reproducible, R-based workflow for organizing, documenting, converting, validating, cleaning, and linking **Indonesian Family Life Survey (IFLS)** data across waves 1–5.
+A **hybrid R + Python** repository for reproducible Indonesian Family Life Survey (IFLS) data preparation, documentation, validation and cross-wave harmonization. Downstream econometric and causal ML research belongs in separate analysis projects.
 
-## Purpose
+## Division of responsibilities
 
-This repository is for **data engineering and documentation**, separate from downstream research and causal analysis. It supports wave-specific datasets and future longitudinal panels without modifying the original Stata sources.
+- **R**: authoritative Stata import, metadata extraction, cleaning, harmonization and panel construction.
+- **Python**: independent validation, profiling, cross-language interoperability and ML-ready exports.
+- **Parquet**: preferred typed exchange format; CSV optional for compatibility. Variable labels, tagged missingness and questionnaire codes require separate metadata and explicit validation.
 
-## Project structure
+Do not maintain competing R and Python cleaning pipelines.
 
-- `01_data/` — local raw Stata files, converted CSVs, metadata, cleaned data, and panels
-- `02_scripts/` — setup, package installation, conversion, exploration, cleaning, and panel scripts
-- `03_documentation/` — R Markdown overviews, Book K exploration, dictionaries, and merging guidance
-- `04_outputs/` — generated tables and figures
-- `05_tests/` — synthetic tests and validation checks
-- `IFLS_Data_Preparation.Rproj` — RStudio project file
+## Structure
 
-Git does not store empty directories, so local data/output subdirectories are created by the setup script.
+- `01_data/`: local raw Stata, CSV, metadata, cleaned, harmonized, panel and research-ready data (ignored by Git)
+- `02_scripts/R/`: primary R scripts
+- `02_scripts/python/`: Python setup, validation and interoperability scripts
+- `03_documentation/`: questionnaires, dictionaries, harmonization and merging guidance
+- `04_notebooks/`: language-specific exploratory notebooks
+- `05_outputs/`: local quality reports, tables and figures
+- `06_tests/`: R/Python tests and synthetic fixtures
+- `07_config/`: wave, path and variable mapping configurations
 
 ## Getting started
 
-Open `IFLS_Data_Preparation.Rproj` in RStudio, ensure the working directory is the project root, and run:
+Clone the repository and open `IFLS_Data_Preparation.Rproj` in RStudio. From the repository root:
 
 ```r
-source("02_scripts/00_setup_folders.R")
-source("02_scripts/01_install_packages.R")
+source("02_scripts/R/00_setup_folders.R")
+source("02_scripts/R/01_install_packages.R")
 ```
 
-Copy your locally obtained IFLS Stata files into `01_data/01_raw_dta/`, keeping wave-specific folders. The conversion, exploration, cleaning, and panel scripts are **scaffolds**, not yet production-ready: they require porting and validating the earlier converter and careful audits of questionnaires and identifiers.
+For Python 3.11+:
 
-## Data safeguards
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+python 02_scripts/python/00_setup.py
+python -m pytest
+```
 
-**Do not commit respondent-level IFLS microdata or other restricted data.** The `.gitignore` excludes raw and generated datasets. Keep source `.dta` files unchanged; record labels and special codes in metadata; verify `pidlink` and household linkage rather than assuming one-to-one merges.
+On Windows, activate with `.venv\\Scripts\\activate` instead.
 
-## Planned milestones
+The setup scripts only create missing local folders. Do not upload IFLS respondent-level data to GitHub.
 
-1. Audit file inventories and questionnaire books for each wave.
-2. Port and test the existing Stata-to-CSV conversion pipeline.
-3. Build variable dictionaries and document missing/special codes.
-4. Implement reproducible book-level cleaning and checks.
-5. Construct and validate cross-wave individual and household panels.
+## Implementation status
+
+**Phase 1: repository structure and environments initialized.** Python validation and R conversion scripts are scaffolds, not completed pipelines. The earlier R converter must be migrated and validated in Phase 2. `pyproject.toml` provides bounded dependencies; an R `renv.lock` and fully locked Python environment will be generated only after dependencies are installed and tested.
+
+## Next milestones
+
+1. Port and test the existing Stata conversion helper and metadata pipeline.
+2. Validate source/export row counts, column order, labels and special missing values.
+3. Pilot IFLS5 Book K cleaning and dictionaries.
+4. Harmonize earlier waves and audit `pidlink` and split-off households.
+5. Export research-defined samples for causal ML.
+
+**Data safety:** Original `.dta` files are immutable. Never commit raw or generated respondent-level data. Use synthetic fixtures for tests.

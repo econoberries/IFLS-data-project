@@ -8,17 +8,17 @@ output:
 
 # Scope
 
-Document IFLS 1–5 data structure, books, questionnaire modules, and longitudinal identifiers.
+Document IFLS waves, books, questionnaire modules, and longitudinal identifiers.
 
 # Preparation
 
-Run the setup and package scripts from the project root.
+Run from the repository root.
 
 ```{r eval=FALSE}
-source("02_scripts/00_setup_folders.R")
-source("02_scripts/01_install_packages.R")
+source("02_scripts/R/00_setup_folders.R")
+source("02_scripts/R/01_install_packages.R")
 ```
 
 # Data inventory
 
-To be populated after the file audit.
+To be populated after the wave and file audit.

@@ -11,7 +11,6 @@ run_ifls_conversion <- function(wave = "ifls5", dataset = "all",
                         nchar(normalizePath(raw_root, winslash = "/")) + 2L)
   wave <- tolower(wave)
   if (wave != "all") {
-    selected_wave <- tolower(strsplit(relative, "/", fixed = TRUE))
     # Wave is the first folder immediately under 01_raw_dta.
     keep <- tolower(sub("/.*$", "", relative)) == wave
     all_files <- all_files[keep]

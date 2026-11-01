@@ -1,0 +1,15 @@
+---
+title: "IFLS 5 — Book K Exploration"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+# Household roster
+
+Document the Book K roster, household membership codes, identifiers, and duplicate checks before cleaning.
+
+# Variable audit
+
+To be completed from source questionnaires and data dictionaries.
